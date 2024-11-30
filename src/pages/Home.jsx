@@ -1,3 +1,11 @@
+import MainLayout from "../layout/MainLayout";
+
 export default function Home() {
-  return <h1 className="text-3xl font-bold underline">Home</h1>;
+  return (
+    <div>
+      <MainLayout>
+        <h1>Home</h1>
+      </MainLayout>
+    </div>
+  );
 }
