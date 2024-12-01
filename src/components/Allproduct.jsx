@@ -58,15 +58,17 @@ export default function Allproduct() {
       <Header query={query} onSearch={handleSearch} />
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-1/4 bg-gray-200 p-4">
-          <h3 className="font-semibold text-lg">Filter by Category</h3>
+        <div className="w-1/4 bg-neutral-900 p-4">
+          <h3 className="font-semibold text-lg text-white">
+            Filter by Category
+          </h3>
           <div className="mt-4">
             {/* Kategori Filter */}
             <button
               onClick={() => handleCategoryChange("")}
-              className={`block w-full text-left p-2 mb-2 ${
+              className={`block w-full text-left p-2 mb-2 rounded  ${
                 !selectedCategory
-                  ? "bg-blue-500 text-white"
+                  ? "bg-neutral-900 text-white"
                   : "bg-white text-black"
               }`}
             >
@@ -76,9 +78,9 @@ export default function Allproduct() {
               <button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
-                className={`block w-full text-left p-2 mb-2 ${
+                className={`block w-full text-left p-2 mb-2 rounded ${
                   selectedCategory === category
-                    ? "bg-blue-500 text-white"
+                    ? "bg-neutral-900 text-white"
                     : "bg-white text-black"
                 }`}
               >
@@ -89,18 +91,21 @@ export default function Allproduct() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 bg-black">
           {/* Tampilkan Produk yang sudah difilter */}
-          <div className="grid grid-cols-4 gap-4 mt-4">
+          <div className="grid grid-cols-3 gap-4 mt-4">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
-                <div key={product.id} className="border p-4">
+                <div
+                  key={product.id}
+                  className="border p-4 rounded-md text-white "
+                >
                   <h2>{product.title}</h2>
-                  <div className="relative bg-transparent">
+                  <div className="relative bg-black py-4">
                     <img
                       src={product.thumbnail}
                       alt={product.title}
-                      className="w-full h-64 object-cover mix-blend-multiply"
+                      className="w-full h-64 object-contain mx-auto "
                     />
                   </div>
                   <div className="flex  w-full justify-between py-2 ">
