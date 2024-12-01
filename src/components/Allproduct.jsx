@@ -103,6 +103,10 @@ export default function Allproduct() {
                       className="w-full h-64 object-cover mix-blend-multiply"
                     />
                   </div>
+                  <div className="flex  w-full justify-between py-2 ">
+                    <button className="mr-2">Details</button>
+                    <button>Buy Now</button>
+                  </div>
                 </div>
               ))
             ) : (
