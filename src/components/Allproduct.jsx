@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header"; // Pastikan mengimpor Header dengan benar
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 export default function Allproduct() {
   const [products, setProducts] = useState([]); // State untuk semua produk
@@ -54,7 +55,7 @@ export default function Allproduct() {
   };
 
   return (
-    <div>
+    <div className="bg-neutral-900">
       <Header query={query} onSearch={handleSearch} />
       <div className="flex">
         {/* Sidebar */}
@@ -98,19 +99,21 @@ export default function Allproduct() {
               filteredProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="border p-4 rounded-md text-white "
+                  className="border p-4 rounded-md text-white group  hover:scale-100 transition duration-300 ease-in-out"
                 >
                   <h2>{product.title}</h2>
                   <div className="relative bg-black py-4">
                     <img
                       src={product.thumbnail}
                       alt={product.title}
-                      className="w-full h-64 object-contain mx-auto "
+                      className="w-full h-64 object-contain mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
                     />
                   </div>
                   <div className="flex  w-full justify-between py-2 ">
-                    <button className="mr-2">Details</button>
-                    <button>Buy Now</button>
+                    <Link to={`/product/${product.id}`} className="mr-2">
+                      Details
+                    </Link>
+                    <Link to={`/checkout/${product.id}`}>Buy Now</Link>
                   </div>
                 </div>
               ))
