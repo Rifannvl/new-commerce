@@ -58,13 +58,15 @@ export default function Login() {
     <div
       className="flex items-center justify-center min-h-screen bg-gray-100"
       style={{
-        backgroundImage: "url('https://picsum.photos/800/600')",
+        backgroundImage:
+          "url('https://img.freepik.com/free-photo/black-laptop-screen-dark-room-night_169016-58233.jpg?ga=GA1.1.1605900882.1733074474&semt=ais_hybrid')",
+        width: "100%",
         height: "100vh",
         backgroundSize: "cover",
       }}
     >
       <div className="bg-transparent border border-gray-200 p-8 rounded-lg shadow-xl backdrop-blur-sm w-full max-w-sm">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+        <h2 className="text-2xl font-semibold text-center text-white mb-6">
           Login
         </h2>
 
@@ -78,7 +80,7 @@ export default function Login() {
           <div className="mb-4">
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-100"
             >
               Username
             </label>
@@ -97,7 +99,7 @@ export default function Login() {
           <div className="mb-6">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-100"
             >
               Password
             </label>
