@@ -28,24 +28,41 @@ export default function Header({ query, onSearch }) {
   return (
     <div>
       <header>
-        <div className="bg-gray-100 border-b border-gray-200">
+        <div className="">
           <div className="px-4 mx-auto sm:px-6 lg:px-8">
             <nav className="relative flex items-center justify-between h-16 lg:h-20">
               {/* Links for Desktop */}
               <div className="hidden lg:flex lg:items-center lg:space-x-10">
+                <Link to="/home">
+                  <svg
+                    id="logo-72"
+                    width="30"
+                    height="100%"
+                    viewBox="0 0 53 44"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    {" "}
+                    <path
+                      d="M23.2997 0L52.0461 28.6301V44H38.6311V34.1553L17.7522 13.3607L13.415 13.3607L13.415 44H0L0 0L23.2997 0ZM38.6311 15.2694V0L52.0461 0V15.2694L38.6311 15.2694Z"
+                      class="ccustom"
+                      fill="#ffffff"
+                    ></path>{" "}
+                  </svg>
+                </Link>
                 <Link
                   to="/product"
-                  className="text-base font-medium text-black"
+                  className="text-base font-medium text-white"
                 >
                   All
                 </Link>
-                <Link to="#" className="text-base font-medium text-black">
+                <Link to="#" className="text-base font-medium text-white">
                   Solutions
                 </Link>
-                <Link to="#" className="text-base font-medium text-black">
+                <Link to="#" className="text-base font-medium text-white">
                   Resources
                 </Link>
-                <Link to="/" className="text-base font-medium text-black">
+                <Link to="/" className="text-base font-medium text-white">
                   Pricing
                 </Link>
               </div>
@@ -70,13 +87,13 @@ export default function Header({ query, onSearch }) {
                   <>
                     <Link
                       to="/cart"
-                      className="text-base font-medium text-black"
+                      className="text-base font-medium text-white"
                     >
                       Cart
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="text-base font-medium text-black"
+                      className="text-base font-medium text-white"
                     >
                       Logout
                     </button>
@@ -85,13 +102,13 @@ export default function Header({ query, onSearch }) {
                   <>
                     <Link
                       to="/login"
-                      className="text-base font-medium text-black"
+                      className="text-base font-medium text-white"
                     >
                       Login
                     </Link>
                     <Link
                       to="/register"
-                      className="text-base font-medium text-black"
+                      className="text-base font-medium text-white"
                     >
                       Register
                     </Link>
