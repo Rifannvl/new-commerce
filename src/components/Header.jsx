@@ -13,7 +13,7 @@ export default function Header({ query, onSearch }) {
   // Menangani logout
   const handleLogout = () => {
     localStorage.removeItem("authToken"); // Hapus token dari localStorage
-    navigate("/login"); // Redirect ke halaman login
+    navigate("/"); // Redirect ke halaman login
   };
 
   // Mengontrol scroll body jika menu mobile terbuka
