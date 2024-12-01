@@ -4,7 +4,7 @@ import MainLayout from "../layout/MainLayout";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-neutral-900">
       <Header />
       <h1>Home</h1>
       <Footer />
