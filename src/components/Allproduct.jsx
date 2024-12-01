@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header"; // Pastikan mengimpor Header dengan benar
+import Footer from "./Footer";
 
 export default function Allproduct() {
   const [products, setProducts] = useState([]); // State untuk semua produk
@@ -112,6 +113,7 @@ export default function Allproduct() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
