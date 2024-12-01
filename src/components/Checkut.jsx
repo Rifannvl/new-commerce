@@ -16,45 +16,67 @@ export default function Checkout() {
           </p>
         ) : (
           <div>
+            {/* Order Summary */}
             <h2 className="text-white text-2xl mb-4">Order Summary</h2>
-            {cart.map((item, index) => (
-              <div key={index} className="bg-gray-800 p-6 mb-4 rounded-lg">
-                <h3 className="text-white">{item.title}</h3>
-                <p className="text-gray-400">
-                  {item.selectedColor} / {item.selectedSize}
-                </p>
-                <p className="text-gray-200">
-                  ${item.price} x {item.quantity} = $
-                  {item.price * item.quantity}
-                </p>
+            <div className="bg-gray-800 p-6 rounded-lg mb-6">
+              {cart.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between py-4 border-b border-gray-700"
+                >
+                  <div className="flex items-center">
+                    <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="w-20 h-20 object-cover rounded-lg mr-4"
+                    />
+                    <div>
+                      <h3 className="text-white text-lg">{item.title}</h3>
+                      <p className="text-gray-400 text-sm">
+                        {item.selectedColor} / {item.selectedSize}
+                      </p>
+                      <p className="text-gray-200 text-sm">
+                        ${item.price} x {item.quantity} = $
+                        {item.price * item.quantity}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {/* Total Price */}
+              <div className="flex items-center justify-between py-4 mt-6 border-t border-gray-700">
+                <h3 className="text-white text-2xl">Total</h3>
+                <span className="text-white text-2xl">
+                  ${calculateTotal().toFixed(2)}
+                </span>
               </div>
-            ))}
-
-            <div className="mt-4 text-white">
-              <h3 className="text-2xl">
-                Total: ${calculateTotal().toFixed(2)}
-              </h3>
             </div>
 
-            {/* Form untuk alamat pengiriman (opsional) */}
-            <div className="mt-6">
+            {/* Shipping Address Form */}
+            <div className="bg-gray-800 p-6 rounded-lg mb-6">
               <h3 className="text-white text-xl mb-4">Shipping Address</h3>
               <form>
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  className="w-full p-2 mb-4 rounded-md"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter your address"
-                  className="w-full p-2 mb-4 rounded-md"
-                />
-                <input
-                  type="text"
-                  placeholder="Enter your phone number"
-                  className="w-full p-2 mb-4 rounded-md"
-                />
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    placeholder="Enter your name"
+                    className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    placeholder="Enter your address"
+                    className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    placeholder="Enter your phone number"
+                    className="w-full p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
                 <button
                   type="submit"
                   className="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 transition"
