@@ -11,7 +11,7 @@ export default function Login() {
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     if (authToken) {
-      navigate("/product");
+      navigate("/home");
     }
   });
 
@@ -43,7 +43,7 @@ export default function Login() {
         localStorage.setItem("authToken", data.token);
 
         // Redirect to the "product" page (or home page)
-        navigate("/product");
+        navigate("/home");
       } else {
         // If login failed, show an error message
         setError("Login failed: " + data.message || "Invalid credentials.");
