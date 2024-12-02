@@ -104,7 +104,7 @@ export default function Allproduct() {
                   <h2>{product.title}</h2>
                   <div className="relative bg-black py-4">
                     <img
-                      src={product.thumbnail}
+                      src={product.images[0]}
                       alt={product.title}
                       className="w-full h-64 object-contain mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
                     />
