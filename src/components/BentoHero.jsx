@@ -26,9 +26,9 @@ export default function BentoHero() {
           >
             <div className="group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black relative border-neutral-200 dark:border-neutral-800">
               <img
-                alt={products[0]?.title}
+                alt={products[2]?.title}
                 className="relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105"
-                src={products[0]?.images[0]}
+                src={products[0]?.images[2]}
                 loading="lazy"
               />
               <div className="absolute bottom-0 left-0 flex w-full px-4 pb-4 lg:px-20 lg:pb-[35%]">
@@ -80,7 +80,7 @@ export default function BentoHero() {
               <img
                 alt={products[2]?.title}
                 className="relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105"
-                src={products[2]?.images[0]}
+                src={products[2]?.images[1]}
                 loading="lazy"
               />
               <div className="absolute bottom-0 left-0 flex w-full px-4 pb-4">
