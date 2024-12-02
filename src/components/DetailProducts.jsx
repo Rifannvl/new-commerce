@@ -81,7 +81,7 @@ export default function DetailProducts() {
                 <div className="flex items-center space-x-4">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
+                    className="w-8 h-8 flex items-center justify-center bg-blue-600 text-gray-100 rounded-md hover:bg-blue-800 focus:outline-none"
                   >
                     -
                   </button>
@@ -90,7 +90,7 @@ export default function DetailProducts() {
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
+                    className="w-8 h-8 flex items-center justify-center bg-blue-600 text-gray-100 rounded-md hover:bg-blue-800 focus:outline-none"
                   >
                     +
                   </button>
