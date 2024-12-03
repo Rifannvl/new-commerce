@@ -1,73 +1,78 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header"; // Pastikan mengimpor Header dengan benar
+import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import { useCart } from ".//context/CardContext"; // Menggunakan CartContext
 
 export default function Allproduct() {
-  const [products, setProducts] = useState([]); // State untuk semua produk
-  const [filteredProducts, setFilteredProducts] = useState([]); // State untuk produk yang difilter
-  const [query, setQuery] = useState(""); // State untuk query pencarian
-  const [categories, setCategories] = useState([]); // State untuk kategori produk
-  const [selectedCategory, setSelectedCategory] = useState(""); // State untuk kategori yang dipilih
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [query, setQuery] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const { addToCart } = useCart(); // Mengakses fungsi addToCart dari CartContext
 
-  // Mengambil data produk dan kategori dari API
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products);
-        setFilteredProducts(data.products); // Set produk awal ke filteredProducts
-
-        // Menentukan kategori unik dari produk
+        setFilteredProducts(data.products);
         const uniqueCategories = [
           ...new Set(data.products.map((product) => product.category)),
         ];
-        setCategories(uniqueCategories); // Set kategori yang ditemukan
+        setCategories(uniqueCategories);
       })
       .catch((err) => console.log(err));
-  }, []); // Menjalankan sekali ketika komponen pertama kali dimuat
+  }, []);
 
-  // Fungsi untuk menangani perubahan pada input pencarian
   const handleSearch = (e) => {
     const value = e.target.value;
-    setQuery(value); // Menyimpan query pencarian
-
-    // Filter produk berdasarkan query pencarian dan kategori yang dipilih
-    const filtered = products.filter(
-      (product) =>
-        product.title.toLowerCase().includes(value.toLowerCase()) &&
-        (selectedCategory ? product.category === selectedCategory : true)
-    );
-    setFilteredProducts(filtered); // Set produk yang sudah difilter
+    setQuery(value);
+    filterProducts(value, selectedCategory);
   };
 
-  // Fungsi untuk menangani perubahan kategori filter
   const handleCategoryChange = (category) => {
-    setSelectedCategory(category); // Set kategori yang dipilih
+    setSelectedCategory(category);
+    filterProducts(query, category);
+  };
 
-    // Filter produk berdasarkan kategori yang dipilih
+  const filterProducts = (query, category) => {
     const filtered = products.filter(
       (product) =>
-        (product.category === category || category === "") &&
-        product.title.toLowerCase().includes(query.toLowerCase()) // Juga mempertimbangkan pencarian
+        product.title.toLowerCase().includes(query.toLowerCase()) &&
+        (category ? product.category === category : true)
     );
-    setFilteredProducts(filtered); // Set produk yang sudah difilter
+    setFilteredProducts(filtered);
+  };
+
+  // Fungsi untuk menangani logika Add to Cart
+  const handleAddToCart = (
+    productId,
+    quantity = 1,
+    selectedColor = "",
+    selectedSize = ""
+  ) => {
+    const product = products.find((product) => product.id === productId);
+
+    if (product) {
+      addToCart(product, quantity, selectedColor, selectedSize); // Menambahkan produk ke cart melalui context
+      alert(`${product.title} has been added to your cart!`);
+    }
   };
 
   return (
     <div className="bg-neutral-900">
       <Header query={query} onSearch={handleSearch} />
       <div className="flex">
-        {/* Sidebar */}
-        <div className="w-1/4 bg-neutral-900 p-4">
+        <div className="w-1/4 bg-neutral-800 p-4">
           <h3 className="font-semibold text-lg text-white">
             Filter by Category
           </h3>
           <div className="mt-4">
-            {/* Kategori Filter */}
             <button
               onClick={() => handleCategoryChange("")}
-              className={`block w-full text-left p-2 mb-2 rounded  ${
+              className={`block w-full text-left p-2 mb-2 rounded ${
                 !selectedCategory
                   ? "bg-neutral-900 text-white"
                   : "bg-white text-black"
@@ -91,15 +96,13 @@ export default function Allproduct() {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="flex-1 p-4 bg-black">
-          {/* Tampilkan Produk yang sudah difilter */}
           <div className="grid grid-cols-3 gap-4 mt-4">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="border p-4 rounded-md text-white group  hover:scale-100 transition duration-300 ease-in-out"
+                  className="border p-4 rounded-md text-white group hover:scale-100 transition duration-300 ease-in-out"
                 >
                   <h2>{product.title}</h2>
                   <div className="relative bg-black py-4">
@@ -109,11 +112,16 @@ export default function Allproduct() {
                       className="w-full h-64 object-contain mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
                     />
                   </div>
-                  <div className="flex  w-full justify-between py-2 ">
+                  <div className="flex w-full justify-between py-2">
                     <Link to={`/product/${product.id}`} className="mr-2">
                       Details
                     </Link>
-                    <Link to={`/checkout/${product.id}`}>Buy Now</Link>
+                    <button
+                      onClick={() => handleAddToCart(product.id)} // Menambahkan produk ke cart
+                      className="text-blue-500"
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               ))
