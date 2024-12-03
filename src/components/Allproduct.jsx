@@ -10,6 +10,7 @@ export default function Allproduct() {
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [loading, setLoading] = useState(true); // State untuk loading
   const { addToCart } = useCart(); // Mengakses fungsi addToCart dari CartContext
 
   useEffect(() => {
@@ -22,8 +23,12 @@ export default function Allproduct() {
           ...new Set(data.products.map((product) => product.category)),
         ];
         setCategories(uniqueCategories);
+        setLoading(false); // Set loading ke false setelah data diambil
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoading(false); // Set loading ke false jika error
+      });
   }, []);
 
   const handleSearch = (e) => {
@@ -60,6 +65,15 @@ export default function Allproduct() {
       alert(`${product.title} has been added to your cart!`);
     }
   };
+
+  // Skeleton Loader Component
+  const SkeletonLoader = () => (
+    <div className="border p-4 rounded-md text-white group animate-pulse">
+      <div className="bg-gray-700 h-48 w-full mb-4"></div>
+      <div className="h-4 bg-gray-700 w-3/4 mb-2"></div>
+      <div className="h-4 bg-gray-700 w-1/2"></div>
+    </div>
+  );
 
   return (
     <div className="bg-neutral-900">
@@ -100,7 +114,12 @@ export default function Allproduct() {
         {/* Produk */}
         <div className="flex-1 p-4 bg-black">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-            {filteredProducts.length > 0 ? (
+            {loading ? (
+              // Jika sedang loading, tampilkan skeleton loader
+              Array(6)
+                .fill()
+                .map((_, index) => <SkeletonLoader key={index} />)
+            ) : filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
                 <div
                   key={product.id}
