@@ -64,15 +64,16 @@ export default function Allproduct() {
   return (
     <div className="bg-neutral-900">
       <Header query={query} onSearch={handleSearch} />
-      <div className="flex">
-        <div className="w-1/4 bg-neutral-800 p-4">
+      <div className="flex flex-col md:flex-row">
+        {/* Filter Kategori untuk Mobile */}
+        <div className="bg-neutral-800 p-4 md:w-1/4">
           <h3 className="font-semibold text-lg text-white">
             Filter by Category
           </h3>
-          <div className="mt-4">
+          <div className="mt-4 space-y-2">
             <button
               onClick={() => handleCategoryChange("")}
-              className={`block w-full text-left p-2 mb-2 rounded ${
+              className={`block w-full text-left p-2 rounded ${
                 !selectedCategory
                   ? "bg-neutral-900 text-white"
                   : "bg-white text-black"
@@ -84,7 +85,7 @@ export default function Allproduct() {
               <button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
-                className={`block w-full text-left p-2 mb-2 rounded ${
+                className={`block w-full text-left p-2 rounded ${
                   selectedCategory === category
                     ? "bg-neutral-900 text-white"
                     : "bg-white text-black"
@@ -96,29 +97,33 @@ export default function Allproduct() {
           </div>
         </div>
 
+        {/* Produk */}
         <div className="flex-1 p-4 bg-black">
-          <div className="grid grid-cols-3 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
                 <div
                   key={product.id}
                   className="border p-4 rounded-md text-white group hover:scale-100 transition duration-300 ease-in-out"
                 >
-                  <h2>{product.title}</h2>
+                  <h2 className="text-sm sm:text-lg">{product.title}</h2>
                   <div className="relative bg-black py-4">
                     <img
                       src={product.images[0]}
                       alt={product.title}
-                      className="w-full h-64 object-contain mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
+                      className="w-full h-48 object-contain mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
                     />
                   </div>
-                  <div className="flex w-full justify-between py-2">
-                    <Link to={`/product/${product.id}`} className="mr-2">
+                  <div className="flex w-full justify-between py-2 mt-3 text-sm">
+                    <Link
+                      to={`/product/${product.id}`}
+                      className="text-blue-500 block w-full mb-2 sm:mb-0"
+                    >
                       Details
                     </Link>
                     <button
-                      onClick={() => handleAddToCart(product.id)} // Menambahkan produk ke cart
-                      className="text-blue-500"
+                      onClick={() => handleAddToCart(product.id)}
+                      className="text-blue-500 block w-full"
                     >
                       Add to Cart
                     </button>
@@ -126,7 +131,7 @@ export default function Allproduct() {
                 </div>
               ))
             ) : (
-              <p className="col-span-4 text-center text-gray-500">
+              <p className="col-span-3 text-center text-gray-500">
                 No products found
               </p>
             )}
