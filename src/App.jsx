@@ -18,7 +18,7 @@ function App() {
           {/* Menggunakan element sebagai pengganti component */}
           <Route path="/product/:id" element={<DetailProducts />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/" element={<Login />} />
         </Routes>
       </Router>
