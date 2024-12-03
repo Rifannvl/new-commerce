@@ -17,7 +17,7 @@ export default function BentoHero() {
   return (
     <div>
       {/* Featured Products Section */}
-      <section className="mx-auto grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2 lg:max-h-[calc(100vh-200px)]">
+      <section className="mx-auto my-2 grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2 lg:max-h-[calc(100vh-200px)]">
         <div className="md:col-span-4 md:row-span-2">
           {/* Product 1 */}
           <a
