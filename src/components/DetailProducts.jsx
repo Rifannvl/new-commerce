@@ -5,6 +5,34 @@ import Header from "./Header";
 import { useCart } from "./context/CardContext"; // Import useCart
 import SliderProducts from "./SliderProducts";
 
+// Skeleton loader for the product details page
+const SkeletonLoader = () => (
+  <div className="animate-pulse bg-neutral-900 min-h-screen">
+    <div className="flex justify-between items-center h-16 px-6">
+      {/* Logo Skeleton */}
+      <div className="h-8 w-32 bg-gray-300 rounded-md"></div>
+      {/* Navigation items skeleton */}
+      <div className="flex space-x-4">
+        <div className="h-6 w-24 bg-gray-300 rounded-full"></div>
+        <div className="h-6 w-24 bg-gray-300 rounded-full"></div>
+        <div className="h-6 w-24 bg-gray-300 rounded-full"></div>
+      </div>
+    </div>
+    {/* Image Skeleton */}
+    <div className="w-full h-64 bg-neutral-600 rounded-lg mb-6"></div>
+    {/* Title Skeleton */}
+    <div className="w-2/3 h-8 bg-neutral-600 rounded-lg mb-4"></div>
+    {/* Description Skeleton */}
+    <div className="w-full h-6 bg-neutral-600 rounded-lg mb-4"></div>
+    {/* Price Skeleton */}
+    <div className="w-32 h-10 bg-neutral-600 rounded-lg mb-4"></div>
+    {/* Quantity Skeleton */}
+    <div className="w-40 h-10 bg-neutral-600 rounded-lg mb-4"></div>
+    {/* Button Skeleton */}
+    <div className="w-full h-12 bg-blue-300 rounded-lg"></div>
+  </div>
+);
+
 export default function DetailProducts() {
   const { id } = useParams(); // Get product ID from URL
   const [product, setProduct] = useState(null); // Product state
@@ -31,7 +59,7 @@ export default function DetailProducts() {
       });
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <SkeletonLoader />;
   if (error) return <p>{error}</p>;
 
   const handleAddToCart = () => {
