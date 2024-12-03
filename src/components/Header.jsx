@@ -67,7 +67,7 @@ export default function Header({ query, onSearch }) {
               {/* Logo dan Search */}
               <div className="lg:absolute lg:-translate-x-1/3 lg:inset-y-5 lg:left-1/2 flex items-center space-x-4">
                 {/* Logo untuk Desktop dan Mobile View */}
-                <Link to="/home">
+                <Link to="/home" className="block lg:hidden">
                   <svg
                     id="logo-72"
                     width="30"
@@ -96,18 +96,19 @@ export default function Header({ query, onSearch }) {
               </div>
 
               {/* Auth Links (Login/Logout & Register) */}
-              <div className="flex items-center space-x-6">
+              <div className="flex justify-end items-center space-x-6">
                 {isLoggedIn ? (
                   <>
+                    {/* Cart only visible on Desktop */}
                     <Link
                       to="/cart"
-                      className="text-base font-medium text-white"
+                      className="text-base font-medium text-white hidden lg:block"
                     >
                       Cart
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="text-base font-medium text-white"
+                      className="text-base font-medium text-white hidden lg:block"
                     >
                       Logout
                     </button>
