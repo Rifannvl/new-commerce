@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import { useCart } from "./context/CardContext"; // Import useCart
+import SliderProducts from "./SliderProducts";
 
 export default function DetailProducts() {
   const { id } = useParams(); // Get product ID from URL
@@ -108,6 +109,7 @@ export default function DetailProducts() {
         </div>
       </div>
 
+      <SliderProducts />
       <Footer />
     </div>
   );
