@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
-import { useCart } from ".//context/CardContext"; // Menggunakan CartContext
+import { useCart } from "./context/CardContext"; // pastikan path context-nya benar
+import { useLocation } from "react-router-dom";
 
 export default function Allproduct() {
   const [products, setProducts] = useState([]);
@@ -10,8 +11,11 @@ export default function Allproduct() {
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [loading, setLoading] = useState(true); // State untuk loading
+  const [loading, setLoading] = useState(true);
   const { addToCart } = useCart(); // Mengakses fungsi addToCart dari CartContext
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get("search"); // Mendapatkan query pencarian dari URL
 
   useEffect(() => {
     fetch("https://dummyjson.com/products")
@@ -27,19 +31,30 @@ export default function Allproduct() {
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false); // Set loading ke false jika error
+        setLoading(false);
       });
   }, []);
+
+  // Efek untuk memperbarui query dan hasil filter berdasarkan query di URL
+  useEffect(() => {
+    if (searchQuery) {
+      setQuery(searchQuery);
+      filterProducts(searchQuery, selectedCategory);
+    } else {
+      setQuery("");
+      filterProducts("", selectedCategory); // Reset filter jika tidak ada query
+    }
+  }, [searchQuery, selectedCategory]);
 
   const handleSearch = (e) => {
     const value = e.target.value;
     setQuery(value);
-    filterProducts(value, selectedCategory);
+    filterProducts(value, selectedCategory); // Update filter produk dengan query terbaru
   };
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    filterProducts(query, category);
+    filterProducts(query, category); // Filter produk berdasarkan kategori yang dipilih
   };
 
   const filterProducts = (query, category) => {
