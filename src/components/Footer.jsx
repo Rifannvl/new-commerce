@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-12">
             <div>
-              <p className="text-base text-gray-500">company</p>
+              <p className="text-base text-gray-500">Company</p>
 
               <ul className="mt-8 space-y-4">
                 <li>
