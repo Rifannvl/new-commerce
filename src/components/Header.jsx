@@ -23,6 +23,17 @@ export default function Header({ query, onSearch }) {
     }
   }, [open]);
 
+  // Menangani pencarian dan mengarahkan ke halaman All Products
+  const handleSearch = (e) => {
+    onSearch(e); // Menangani perubahan query
+    const queryValue = e.target.value.trim();
+    if (queryValue) {
+      navigate(`/product?search=${queryValue}`); // Arahkan ke halaman produk dengan query pencarian
+    } else {
+      navigate("/product"); // Jika tidak ada query, arahkan ke halaman produk tanpa filter
+    }
+  };
+
   return (
     <div>
       <header>
@@ -37,7 +48,7 @@ export default function Header({ query, onSearch }) {
                     width="30"
                     height="100%"
                     viewBox="0 0 53 44"
-                    fill="none"
+                    fillRule="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
@@ -73,13 +84,13 @@ export default function Header({ query, onSearch }) {
                     width="30"
                     height="100%"
                     viewBox="0 0 53 44"
-                    fill="none"
+                    fillRule="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M23.2997 0L52.0461 28.6301V44H38.6311V34.1553L17.7522 13.3607L13.415 13.3607L13.415 44H0L0 0L23.2997 0ZM38.6311 15.2694V0L52.0461 0V15.2694L38.6311 15.2694Z"
                       className="ccustom"
-                      fill="#ffffff"
+                      fillRule="#ffffff"
                     ></path>
                   </svg>
                 </Link>
@@ -88,7 +99,7 @@ export default function Header({ query, onSearch }) {
                   <input
                     type="text"
                     value={query}
-                    onChange={onSearch}
+                    onChange={handleSearch} // Panggil fungsi handleSearch saat ada perubahan
                     placeholder="Search products..."
                     className="px-4 py-2 border rounded-md w-full"
                   />
@@ -142,7 +153,7 @@ export default function Header({ query, onSearch }) {
                 <svg
                   className="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
+                  fillRule="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
@@ -170,13 +181,13 @@ export default function Header({ query, onSearch }) {
                     width="40"
                     height="100%"
                     viewBox="0 0 53 44"
-                    fill="none"
+                    fillRule="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M23.2997 0L52.0461 28.6301V44H38.6311V34.1553L17.7522 13.3607L13.415 13.3607L13.415 44H0L0 0L23.2997 0ZM38.6311 15.2694V0L52.0461 0V15.2694L38.6311 15.2694Z"
                       className="ccustom"
-                      fill="#ffffff"
+                      fillRule="#ffffff"
                     ></path>
                   </svg>
                 </Link>
